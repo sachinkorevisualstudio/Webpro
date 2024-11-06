@@ -1,0 +1,114 @@
+﻿@model Webpro.Models.TblRateChartPartywise
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>TblRateChartPartywise</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Partyname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Partyname)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RateGsb)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RateGsb)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RateWmm)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RateWmm)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Rate60mm)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Rate60mm)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Rate40mm)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Rate40mm)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Rate26mm)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Rate26mm)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Rate20mm)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Rate20mm)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Rate10mm)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Rate10mm)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Rate8by6)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Rate8by6)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RateMsand)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RateMsand)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RateDust)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RateDust)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RateWsand)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RateWsand)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RateWpsand)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RateWpsand)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RateStone)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RateStone)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RateRoboSand)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RateRoboSand)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RateSander)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RateSander)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Indexnum">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

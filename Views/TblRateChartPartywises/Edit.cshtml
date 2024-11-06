@@ -1,0 +1,109 @@
+﻿@model Webpro.Models.TblRateChartPartywise
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>TblRateChartPartywise</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Indexnum" />
+            <div class="form-group">
+                <label asp-for="Partyname" class="control-label"></label>
+                <input asp-for="Partyname" class="form-control" />
+                <span asp-validation-for="Partyname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RateGsb" class="control-label"></label>
+                <input asp-for="RateGsb" class="form-control" />
+                <span asp-validation-for="RateGsb" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RateWmm" class="control-label"></label>
+                <input asp-for="RateWmm" class="form-control" />
+                <span asp-validation-for="RateWmm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rate60mm" class="control-label"></label>
+                <input asp-for="Rate60mm" class="form-control" />
+                <span asp-validation-for="Rate60mm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rate40mm" class="control-label"></label>
+                <input asp-for="Rate40mm" class="form-control" />
+                <span asp-validation-for="Rate40mm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rate26mm" class="control-label"></label>
+                <input asp-for="Rate26mm" class="form-control" />
+                <span asp-validation-for="Rate26mm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rate20mm" class="control-label"></label>
+                <input asp-for="Rate20mm" class="form-control" />
+                <span asp-validation-for="Rate20mm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rate10mm" class="control-label"></label>
+                <input asp-for="Rate10mm" class="form-control" />
+                <span asp-validation-for="Rate10mm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rate8by6" class="control-label"></label>
+                <input asp-for="Rate8by6" class="form-control" />
+                <span asp-validation-for="Rate8by6" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RateMsand" class="control-label"></label>
+                <input asp-for="RateMsand" class="form-control" />
+                <span asp-validation-for="RateMsand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RateDust" class="control-label"></label>
+                <input asp-for="RateDust" class="form-control" />
+                <span asp-validation-for="RateDust" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RateWsand" class="control-label"></label>
+                <input asp-for="RateWsand" class="form-control" />
+                <span asp-validation-for="RateWsand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RateWpsand" class="control-label"></label>
+                <input asp-for="RateWpsand" class="form-control" />
+                <span asp-validation-for="RateWpsand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RateStone" class="control-label"></label>
+                <input asp-for="RateStone" class="form-control" />
+                <span asp-validation-for="RateStone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RateRoboSand" class="control-label"></label>
+                <input asp-for="RateRoboSand" class="form-control" />
+                <span asp-validation-for="RateRoboSand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RateSander" class="control-label"></label>
+                <input asp-for="RateSander" class="form-control" />
+                <span asp-validation-for="RateSander" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

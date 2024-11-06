@@ -1,0 +1,125 @@
+﻿@model IEnumerable<Webpro.Models.TblRateChartPartywise>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Partyname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RateGsb)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RateWmm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rate60mm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rate40mm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rate26mm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rate20mm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rate10mm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rate8by6)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RateMsand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RateDust)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RateWsand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RateWpsand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RateStone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RateRoboSand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RateSander)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Partyname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RateGsb)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RateWmm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rate60mm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rate40mm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rate26mm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rate20mm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rate10mm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rate8by6)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RateMsand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RateDust)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RateWsand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RateWpsand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RateStone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RateRoboSand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RateSander)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Indexnum">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Indexnum">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Indexnum">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,1055 @@
+﻿@model Webpro.Models.TblDispatch
+<head>
+
+
+
+   
+</head>
+<style>
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    input .form-control{
+        width:100px;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: black;
+    }
+
+    header {
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .container {
+        display: flex;
+        padding: 20px;
+    }
+
+    .left-section {
+        flex: 1; /* Adjusts to take up available space */
+        background-color: #e9ecef;
+        margin-right: 10px; /* Space between sections */
+        padding: 20px;
+    }
+
+    .right-section {
+        flex: 2; /* Takes up more space than the left section */
+        background-color: #e2e2e2;
+        padding: 20px;
+    }
+
+  
+</style>
+
+
+
+
+
+
+
+
+@{
+    ViewData["Title"] = "Create";
+
+
+
+
+
+    // List of material options
+
+    var materialsx9 = new List<string>
+    {
+        "GSB",
+        "WMM",
+        "60MM",
+        "40MM",
+        "26MM",
+        "20MM",
+        "10MM",
+        "8/6MM",
+        "MSAND",
+        "DUST",
+        "Washable_sand",
+        "Washable_plaster_sand",
+        "Stone",
+        "WASTAGE",
+        "robo_sand",
+        "sander",
+        "OPENING_BAL"
+    };
+}
+
+<h1>Create</h1>
+
+<h4>Dispatch</h4>
+<hr />
+
+
+<div class="container">
+   <div class="left-section">
+        <h2>Left Section</h2>
+        <p>Content for the left section goes here.</p>
+
+
+
+
+        <!-- Left Input Fields -->
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <label asp-for="Datex" class="control-label"></label>
+                    <input asp-for="Datex" type="date" class="form-control" />
+                    <span asp-validation-for="Datex" class="text-danger"></span>
+
+
+                <div class="form-group" style="display: flex; align-items: center;">
+                    <input asp-for="Timex" type="hidden" />
+
+                    <input asp-for="Monthnamex" readonly required style="display: inline-block; margin-right: 10px; width: 100px;" />
+                    <input asp-for="Yearnamex" readonly required style="display: inline-block; width: 100px;" />
+                </div>
+
+
+
+
+
+                <div class="form-group">
+                    <label asp-for="Chalanno" class="control-label"></label>
+                    <input asp-for="Chalanno" id="Chalanno" autocomplete="off" class="form-control" required />
+                    <span asp-validation-for="Chalanno" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="RegOrStock" class="control-label"></label>
+                    <select asp-for="RegOrStock" class="form-control">
+                        <option value="Regular">Regular</option>
+                        <option value="Stock">Stock</option>
+                    </select>
+                    <span asp-validation-for="RegOrStock" class="text-danger"></span>
+                </div>
+
+               
+
+                    <!-----------------partyname-------------------------->
+                    <div class="form-group">
+                    <label asp-for="Partyname" class="control-label"></label>
+                    <input asp-for="Partyname" id="partyname" class="form-control text-uppercase" accesskey="p" required />
+                    <span asp-validation-for="Partyname" class="text-danger"></span>
+                    <style>
+                        .text-uppercase {
+                            text-transform: uppercase;
+                        }
+                    </style>
+                    <!-----------------partyname end-------------------------->
+
+                       <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="partyOption" value="rokh" onclick="updatePartyAndSite(this)" />
+                            ROKH
+                        </label>
+                        <label>
+                            <input type="checkbox" name="partyOption" value="rokhonline" onclick="updatePartyAndSite(this)" />
+                            ROKH Online
+                        </label>
+                        <label>
+                            <input type="checkbox" name="partyOption" value="sidhi" onclick="updatePartyAndSite(this)" />
+                            Sidhi Sangli
+                        </label>
+                        <label>
+                            <input type="checkbox" name="partyOption" value="pride" onclick="updatePartyAndSite(this)" />
+                            Pride Sangli
+                        </label>
+                        <label>
+                            <input type="checkbox" name="partyOption" value="perl" onclick="updatePartyAndSite(this)" />
+                            Perl
+                        </label>
+                      </<div>
+
+                            <div class="checkbox-group">
+
+                                <label>
+                                    <input type="checkbox" name="partyOption" value="spinning" onclick="updatePartyAndSite(this)" />
+                                    Spinning
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="partyOption" value="coating" onclick="updatePartyAndSite(this)" />
+                                    Coating
+                                </label>
+                                <label class="constructioncheck">
+                                    <input type="checkbox" name="partyOption" value="sahyadriconstruction" onclick="updatePartyAndSite(this)" accesskey="c" />
+                                    Sahyadri Construction
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="partyOption" value="hdpeagro" onclick="updatePartyAndSite(this)" />
+                                    HDPE Agro
+                                </label>
+                            </div>
+                    </div>
+
+                        <script>
+                            function updatePartyAndSite(checkbox) {
+                                // Uncheck other checkboxes
+                                document.querySelectorAll('input[name="partyOption"]').forEach(function (item) {
+                                    if (item !== checkbox) item.checked = false;
+                                });
+
+                                let partyname = '';
+                                let site = '';
+
+                                if (checkbox.checked) {
+                                    switch (checkbox.value) {
+                                        case 'rokh':
+                                            partyname = 'ROKH_GENERAL';
+                                            site = '';
+                                            break;
+                                        case 'rokhonline':
+                                            partyname = 'ROKH_ONLINE_GOOGLE';
+                                            site = '';
+                                            break;
+                                        case 'sidhi':
+                                            partyname = 'SAHYADRI DEVELOPERS  SANGLI';
+                                            site = 'SIDHI SANGLI';
+                                            break;
+                                        case 'pride':
+                                            partyname = 'SAHYADRI DEVELOPERS  SANGLI';
+                                            site = 'PRIDE SANGLI';
+                                            break;
+                                        case 'perl':
+                                            partyname = 'SAHYADRI DEVELOPERS  SANGLI';
+                                            site = 'PERL';
+                                            break;
+                                        case 'spinning':
+                                            partyname = 'SAHYADRI PIPES';
+                                            site = 'SPINNING';
+                                            break;
+                                        case 'coating':
+                                            partyname = 'SAHYADRI PIPES';
+                                            site = 'COATING';
+                                            break;
+                                        case 'sahyadriconstruction':
+                                            partyname = 'SAHYADRI CONSTRUCTION';
+                                            site = '?';
+                                            break;
+                                        case 'hdpeagro':
+                                            partyname = 'SAHYADRI CONSTRUCTION';
+                                            site = 'HDPE agro pipe';
+                                            break;
+                                        default:
+                                            partyname = '';
+                                            site = '';
+                                            break;
+                                    }
+                                }
+
+                                // Update the Partyname and Site textboxes
+                                document.getElementById('partyname').value = partyname;
+                                document.getElementById('site').value = site;
+
+                                // Change background color of Site if site text is "?"
+                                if (site === '?') {
+                                    document.getElementById('site').style.backgroundColor = 'orange';
+                                } else {
+                                    document.getElementById('site').style.backgroundColor = ''; // Reset background color
+                                }
+                            }
+                        </script>
+
+                        <style>
+                            .checkbox-group {
+                                display: flex;
+                                gap: 10px;
+                            }
+
+                            .constructioncheck {
+                                background-color: darkkhaki;
+                                color: brown;
+                            }
+
+                            .checkbox-group label {
+                                display: flex;
+                                align-items: center;
+                                background-color: #007bff;
+                                color: white;
+                                padding: 5px 10px;
+                                border-radius: 5px;
+                                cursor: pointer;
+                                transition: background-color 0.3s;
+                            }
+
+                            .checkbox-group input {
+                                margin-right: 5px;
+                                display: none;
+                            }
+
+                                .checkbox-group input:checked + label {
+                                    background-color: #0056b3;
+                                }
+
+                            .checkbox-group label:hover {
+                                background-color: #0056b3;
+                            }
+                        </style>
+
+
+                        <!--------------------------------------------------------------------------------->
+                        
+
+                        <!--------------------------------------------------------------------------------->
+
+
+                        <div class="form-group">
+                            <label asp-for="Txtpartynamesearched" class="control-label">RateChart searched...</label>
+                            <input asp-for="Txtpartynamesearched" id="txtpartynamesearched" class="form-control" readonly />
+                            <span asp-validation-for="Txtpartynamesearched" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Gstcustomer" class="control-label"></label>
+                            <input asp-for="Gstcustomer" id="Gstcustomer" class="form-control" readonly required />
+                            <span asp-validation-for="Gstcustomer" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Site" class="control-label"></label>
+                            <input asp-for="Site" id="site" class="form-control text-uppercase" />
+                            <span asp-validation-for="Site" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Vehicleno" class="control-label"></label>
+                            <input asp-for="Vehicleno" class="form-control text-uppercase" id="Vehicleno" />
+                            <span asp-validation-for="Vehicleno" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Drivername" class="control-label"></label>
+                            <input asp-for="Drivername" class="form-control" readonly />
+                            <span asp-validation-for="Drivername" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="Supervisorname" type="hidden" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Material" class="control-label"></label>
+                            <select asp-for="Material" id="material" class="form-control" required>
+                                <option value="">Select Material</option>
+                                @foreach (var material in materialsx9)
+
+
+
+                                {
+                                    <option value="@material">@material</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Material" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Trip" class="control-label"></label>
+                            <input asp-for="Trip" class="form-control" />
+                            <span asp-validation-for="Trip" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Ton" class="control-label"></label>
+                            <input asp-for="Ton" class="form-control" />
+                            <span asp-validation-for="Ton" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Qty" class="control-label"></label>
+                            <input asp-for="Qty" type="number" id="qty" class="form-control" required min="0" max="99" />
+                            <span asp-validation-for="Qty" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="RateFromchart" class="control-label"></label>
+                            <input asp-for="RateFromchart" autocomplete="off" id="RateFromChartTxt" class="form-control" required />
+                            <span asp-validation-for="RateFromchart" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="TransportCharge" class="control-label"></label>
+                            <input asp-for="TransportCharge" autocomplete="off" type="number" id="TransportCharge" class="form-control" value="0" required />
+                            <span asp-validation-for="TransportCharge" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="RateApplied" class="control-label"></label>
+                            <input asp-for="RateApplied" type="number" id="RateApplied"  class="form-control" readonly />
+                            <span asp-validation-for="RateApplied" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Amount1" class="control-label"></label>
+                            <input asp-for="Amount1" id="Amount1" type="number" class="form-control" readonly />
+                            <span asp-validation-for="Amount1" class="text-danger"></span>
+                        </div>
+
+                     
+
+                        <div class="form-group">
+                            <label asp-for="GstAmount" class="control-label"></label>
+                            <input asp-for="GstAmount" type="number" id="GstAmount" class="form-control" value="0" readonly />
+                            <span asp-validation-for="GstAmount" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="TotalAmountBill" class="control-label"></label>
+                            <input asp-for="TotalAmountBill" type="number" id="TotalAmountBill" class="form-control" readonly />
+                            <span asp-validation-for="TotalAmountBill" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Discountpercent" class="control-label"></label>
+                            <input asp-for="Discountpercent" autocomplete="off" id="Discountpercent" type="number" list="discount-options" class="form-control" value="0" required min="0" max="99" />
+                            <datalist id="discount-options">
+                                <option value="0">0</option>
+                                <option value="10">10</option>
+                            </datalist>
+                            <span asp-validation-for="Discountpercent" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+
+                            <input asp-for="Royalty" id="Royalty" autocomplete="off" class="form-control" value="0" type="hidden" />
+
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Payablebillwithdiscount" class="control-label"></label>
+                            <input asp-for="Payablebillwithdiscount" autocomplete="off" id="Payablebillwithdiscount" type="number" class="form-control" required />
+                            <span asp-validation-for="Payablebillwithdiscount" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="CashPaymentRs" autocomplete="off" type="hidden" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="OnlinePaymentRs" autocomplete="off" type="hidden" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Summary" class="control-label"></label>
+                            <input asp-for="Summary" class="form-control text-uppercase" />
+                            <span asp-validation-for="Summary" autocomplete="off" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+
+                            <input asp-for="JamaAmt" class="form-control" autocomplete="off" type="hidden" />
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <input asp-for="Monthnumber" class="form-control" autocomplete="off" type="hidden" />
+
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="DataEntryDatetime" type="hidden" autocomplete="off" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                            <div>
+                                <a asp-action="Index">Back to List</a>
+                            </div>
+                        </div>
+                        <BR />  <BR />  <BR />  <BR />
+                       
+            </form>
+        </div>
+   </div>
+
+</div>
+
+
+    <div class="right-section">
+        <h2>Right Section</h2>
+        <p>Content for the right section goes here.</p>
+        <!-- Right Image Section -->
+        <div class="col-md-8">
+            <div class="image-section" id="ajaxOutput">
+                <!-- Placeholder for the AJAX output -->
+                <p>HERE YOU SEE ...</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+   
+
+
+
+<!--------------------------------end of layout----->
+
+
+
+<!---model to add new partyname->
+
+<!-- Bootstrap Modal -->
+
+<!--end model add partyname-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Store party names in an array for autocomplete
+            var partyNamesArray = [];
+
+            // Populate partyname dropdown on page load and store data in array
+            $.ajax({
+                url: '@Url.Action("GetPartyNames", "TblDispatches")',
+                type: 'GET',
+                success: function (data) {
+                    $.each(data, function (index, item) {
+                        if (item && item.partyname) {
+                            partyNamesArray.push(item.partyname);
+                        } else {
+                            console.error('Item does not contain partyname:', item);
+                        }
+                    });
+
+                    // Sort the array alphabetically
+                    partyNamesArray.sort();
+
+                    // Autocomplete functionality for the party name input
+                    $('#partyname').autocomplete({
+                        source: function (request, response) {
+                            var results = $.ui.autocomplete.filter(partyNamesArray, request.term);
+                            if (!request.term) {
+                                results = partyNamesArray;
+                            }
+                            response(results);
+                        },
+                        select: function (event, ui) {
+                            $('#partyname').val(ui.item.value);
+                            return false;
+                        },
+                        minLength: 0
+                    }).focus(function () {
+                        $(this).autocomplete('search', '');
+                    });
+
+                    // Check if the party name exists on focus out
+                    $('#partyname').on('focusout', function () {
+                        var inputVal = $(this).val();
+                        if (inputVal && !partyNamesArray.includes(inputVal)) {
+                            var userConfirmed = window.confirm('The entered party name is not in the list. Would you like to "ADD a new party name" - opening in a new TAB?');
+
+                            if (userConfirmed) {
+                                // Open the Tblpartynamelists Create view in a new tab
+                                window.open('@Url.Action("Create", "Tblpartynamelists")', '_blank');
+                            } else {
+                                alert("Suggestion: Add Party name else add as ROKH or ROKH_Online");
+                            }
+                        }
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('AJAX Error:', status, error);
+                }
+            });
+
+           
+
+            // Handle Datex input change
+            $('#Datex').on('change', function () {
+                var selectedDate = new Date($(this).val());
+                var monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+                var monthIndex = selectedDate.getMonth();
+                var year = selectedDate.getFullYear();
+
+                $('#Monthnamex').val(monthNames[monthIndex]);
+                $('#Yearnamex').val(year);
+            });
+
+            // Handle Chalanno input change
+            $('#Chalanno').on('change', function () {
+                var chalanno = $(this).val();
+
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetDispatchByChalanno", "TblDispatches")',
+                    data: { chalanno: chalanno },
+                    success: function (data) {
+                        var table = '';
+
+                        if (data.length > 0) {
+                            $.each(data, function (index, item) {
+                                var date = new Date(item.datex);
+                                var formattedDate = ('0' + date.getDate()).slice(-2) + '-' +
+                                    ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
+                                    date.getFullYear();
+
+                                table += '<tr>' +
+                                    '<td>' + item.id + '</td>' +
+                                    '<td style="color:red;">' + formattedDate + '</td>' +
+                                    '<td>' + item.chalanno + '</td>' +
+                                    '<td>' + item.partyname + '</td>' +
+                                    '<td>' + item.site + '</td>' +
+                                    '<td>' + item.material + '</td>' +
+                                    '<td>' + item.rateFromchart + '</td>' +
+                                    '<td>' + item.transportCharge + '</td>' +
+                                    '<td>' +
+                                    '<a href="@Url.Action("Edit", "TblDispatches")/' + item.id + '">Edit</a> | ' +
+                                    '<a href="@Url.Action("Details", "TblDispatches")/' + item.id + '">Details</a> | ' +
+                                    '<a href="@Url.Action("Delete", "TblDispatches")/' + item.id + '">Delete</a>' +
+                                    '</td>' +
+                                    '</tr>';
+                            });
+
+                            $('#ajaxOutput').html('<table class="table"><thead><tr><th>ID</th><th>Date</th><th>Chalan No</th><th>Party Name</th><th>Site</th><th>Material</th><th>Rate From Chart</th><th>Transport Charge</th><th>Actions</th></tr></thead><tbody>' + table + '</tbody></table>');
+                        } else {
+                            $('#ajaxOutput').html('<p>No results found.</p>');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("An error occurred while retrieving data.");
+                    }
+                });
+            });
+            //
+           // site code
+            // Store site names in an array for autocomplete
+            var siteNamesArray = [];
+
+            // Populate site dropdown on page load and store data in array
+            $.ajax({
+                url: '@Url.Action("GetSiteNames", "TblDispatches")',
+                type: 'GET',
+                success: function (data) {
+                    $.each(data, function (index, item) {
+                        if (item) {
+                            siteNamesArray.push(item);
+                        } else {
+                            console.error('Item does not contain site:', item);
+                        }
+                    });
+
+                    // Sort the array alphabetically
+                    siteNamesArray.sort();
+
+                    // Autocomplete functionality for the site input
+                    $('#site').autocomplete({
+                        source: function (request, response) {
+                            var results = $.ui.autocomplete.filter(siteNamesArray, request.term);
+                            if (!request.term) {
+                                results = siteNamesArray;
+                            }
+                            response(results);
+                        },
+                        select: function (event, ui) {
+                            $('#site').val(ui.item.value);
+                            return false;
+                        },
+                        minLength: 0
+                    }).focus(function () {
+                        $(this).autocomplete('search', '');
+                    });
+
+                    // Check if the site exists on focus out
+                    $('#site').on('focusout', function () {
+                        var inputVal = $(this).val();
+                        if (inputVal && !siteNamesArray.includes(inputVal)) {
+                            var userConfirmed = window.confirm('The entered site name is not in the list. Would you like to "ADD a new site name"?');
+
+                            if (userConfirmed) {
+                                // Handle adding a new site name
+                                // For example, open a create view or add the site to a list
+                                alert("Add functionality to open site creation page or handle the new site addition.");
+                            }
+                        }
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('AJAX Error:', status, error);
+                }
+            });
+        
+            ////////
+            $('#Vehicleno').on('focusout', function () {
+                var input = $(this).val();
+                var partyName = $('#partyname').val();
+
+                if (input.length >= 4) {
+                    // Extract the last 4 digits of the Vehicleno input
+                    var lastFourDigits = input.slice(-4);
+                    alert("vehicle");
+                    $.ajax({
+                        url: '@Url.Action("CheckVehicleNumber", "TblDispatches")',
+                        type: 'GET',
+                        data: { input: lastFourDigits }, // Send only the last 4 digits
+                        success: function (data) {
+                            if (partyName.toLowerCase().includes("sahyadri")) {
+                                $('#Drivername').val(data.driver || "");
+                            } else {
+                                if (data.result === "yesfound") {
+                                    alert("Company Vehicle Found");
+                                    $('#Drivername').val(data.driver || "");
+                                    $('#TransportCharge').css("background-color", "orange");
+                                } else {
+                                    $('#Drivername').val("");
+                                    $('#TransportCharge').css("background-color", "");
+                                }
+                            }
+                        },
+                        error: function () {
+                            alert("An error occurred while checking the vehicle number.");
+                            $('#TransportCharge').css("background-color", "orange");
+                        }
+                    });
+                } else {
+                    $('#Drivername').val("");
+                    $('#TransportCharge').css("background-color", "");
+                }
+            });
+
+
+
+            //////
+           
+                $('#material').change(function () {
+                    var partyname = $('#partyname').val();
+                    var material = $(this).val();
+
+                    if (partyname && material) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/TblDispatches/GetRate', // Your controller and action
+                            data: {
+                                Partyname: partyname,
+                                Material: material
+                            },
+                            success: function (data) {
+                                // This assumes 'data' contains only the rate for the selected material
+                                $('#RateFromChartTxt').val(data.rateFromChart || ''); // Populate the text box
+                            },
+                            error: function (xhr, status, error) {
+                                console.error('Error fetching rate:', error);
+                                $('#RateFromChartTxt').val(''); // Clear the text box in case of an error
+                            }
+                        });
+                    } else {
+                        $('#RateFromChartTxt').val(''); // Clear if partyname or material is empty
+                    }
+                });
+
+                ///rate chart fill by material change with partyaname
+            $('#material').change(function () {
+                var partyname = $('#partyname').val();
+                var material = $(this).val();
+
+                // Only proceed if both partyname and material are provided
+                if (partyname && material) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/TblDispatches/GetRate', // URL of your controller action
+                        data: {
+                            Partyname: partyname,
+                            Material: material
+                        },
+                        success: function (response) {
+                            // Populate the rate text box with the retrieved rate
+                            $('#RateFromChartTxt').val(response.rateFromChart || ''); // Handle null rate case
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error fetching rate:', error);
+                            $('#RateFromChartTxt').val(''); // Clear text box on error
+                        }
+                    });
+                } else {
+                    $('#RateFromChartTxt').val(''); // Clear if either partyname or material is empty
+                }
+            });
+            ////
+
+            // Function to fetch and fill rate from the rate chart
+            function fetchRate() {
+                var partyname = $('#partyname').val();
+                var material = $('#material').val();
+
+                // Only proceed if both partyname and material are provided
+                if (partyname && material) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/TblDispatches/GetRate', // URL of your controller action
+                        data: {
+                            Partyname: partyname,
+                            Material: material
+                        },
+                        success: function (response) {
+                            // Populate the rate text box with the retrieved rate
+                            $('#RateFromChartTxt').val(response.rateFromChart || ''); // Handle null rate case
+
+                            // Populate the searched party name
+                            $('#txtpartynamesearched').val(response.partyNameSearched || ''); // Update the searched party name
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error fetching rate:', error);
+                            $('#RateFromChartTxt').val(''); // Clear text box on error
+                            $('#txtpartynamesearched').val(''); // Clear searched party name on error
+                        }
+                    });
+                } else {
+                    $('#RateFromChartTxt').val(''); // Clear if either partyname or material is empty
+                    $('#txtpartynamesearched').val(''); // Clear searched party name if input is empty
+                }
+            }
+
+            // Trigger when material or partyname changes
+            $('#material').change(function () {
+                fetchRate(); // Fetch rate when material changes
+            });
+
+            $('#partyname').change(function () {
+                fetchRate(); // Fetch rate when partyname changes
+            });
+
+            // Optionally, trigger fetch when the rate text box gains focus
+            $('#RateFromChartTxt').focus(function () {
+                fetchRate(); // Fetch rate when RateFromChartTxt gains focus
+            });
+
+
+            ///
+            // Attach change event to all checkboxes in the checkbox groups
+            $('input[name="partyOption"]').change(function () {
+                // Check if any checkbox is checked
+                if ($('input[name="partyOption"]:checked').length > 0) {
+                   // alert('Hello');
+                    fetchRate();
+
+
+                    //** */populate gst customer yes no transport charge discount
+                    var partyname = $('#partyname').val(); // Use partyname field
+                    fetchPartyDetails(partyname); // Fetch based on partyname again
+                   
+                }
+            });
+
+
+
+
+            ////
+            function calculateAmounts() {
+                // Get values from inputs
+                var transportCharge = parseFloat($('#TransportCharge').val()) || 0; // Ensure it's a number
+                var qty = parseFloat($('#qty').val()) || 0; // Ensure it's a number
+                var rateFromChart = parseFloat($('#RateFromChartTxt').val()) || 0; // Ensure it's a number
+                var gstCustomer = $('#Gstcustomer').val(); // Assuming this is a string like "Yes" or "No"
+
+                // Check if transportCharge is empty or an empty string and set to 0
+                if (isNaN(transportCharge) || transportCharge === "") {
+                    transportCharge = 0;
+                }
+
+                // Calculate rate applied
+                var rateApplied = rateFromChart + transportCharge; // Use transportCharge here
+                $('#RateApplied').val(rateApplied.toFixed(2)); // Set rate applied textbox value with 2 decimal places
+
+                // Calculate amount1
+                var amount1 = qty * rateApplied;
+                $('#Amount1').val(amount1.toFixed(2)); // Set amount1 textbox value with 2 decimal places
+
+                // Calculate GST amount
+                var gstAmount = (gstCustomer === "Yes") ? (amount1 * 0.05) : 0; // Use 0.05 instead of 5 / 100
+                $('#GstAmount').val(gstAmount.toFixed(2)); // Set GST amount textbox value with 2 decimal places
+
+                // Calculate total amount bill
+                var totalAmountBill = amount1 + gstAmount;
+                $('#TotalAmountBill').val(totalAmountBill.toFixed(2)); // Set total amount bill value with 2 decimal places
+
+                // Calculate payable bill with discount
+                var discountPercent = parseFloat($('#Discountpercent').val()) || 0; // Ensure it's a number
+                var royalty = parseFloat($('#Royalty').val()) || 0; // Ensure it's a number
+                var payableBillWithDiscount = totalAmountBill - (totalAmountBill * (discountPercent / 100)) + royalty;
+                $('#Payablebillwithdiscount').val(payableBillWithDiscount.toFixed(2)); // Set payable bill value with 2 decimal places
+            }
+
+            // Event handler for qty text change
+            $('#qty').on('input', function () {
+                calculateAmounts();
+            });
+
+            // Event handler for Amount1 focus event
+            $('#Amount1').focus(function () {
+               // alert("Amount1 focus");
+                calculateAmounts();
+            });
+
+
+
+           /////
+
+            // Fetch party details function
+            function fetchPartyDetails(partyname) {
+                if (partyname) {
+                    $.ajax({
+                        type: 'GET', // Change to POST if needed
+                        url: '/TblDispatches/GetPartyDetails', // Adjust this URL to point to your API
+                        data: { partyname: partyname },
+                        success: function (response) {
+                            // Populate the text boxes with the response data
+                            $('#Gstcustomer').val(response.gstCustomer || ''); // Handle null case for Gstcustomer
+
+                            // Set TransportCharge to 0 if null, undefined, or empty
+                            $('#TransportCharge').val(response.transcharge ? response.transcharge : 0);
+
+                            // Set Discountpercent to 0 if null, undefined, or empty
+                            $('#Discountpercent').val(response.discount ? response.discount : 0);
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error fetching party details:', error);
+                            // Clear the text boxes if there's an error
+                            $('#Gstcustomer').val('');
+                            $('#TransportCharge').val(0);  // Set 0 on error
+                            $('#Discountpercent').val(0);  // Set 0 on error
+                        }
+                    });
+                } else {
+                    // Clear the text boxes if the party name is empty
+                    $('#Gstcustomer').val('');
+                    $('#TransportCharge').val(0);  // Set 0 if partyname is empty
+                    $('#Discountpercent').val(0);  // Set 0 if partyname is empty
+                }
+            }
+
+            // Event listeners yes no transpotydiscountpercent
+
+            // Fetch party details when partyname changes
+            $('#partyname').on('change', function () {
+                var partyname = $(this).val();
+                fetchPartyDetails(partyname);
+            });
+
+            // Fetch party details when another element focusing on 'searched' party name
+            $('#txtpartynamesearched').on('focus', function () {
+                var partyname = $(this).val();
+                fetchPartyDetails(partyname);
+            });
+
+            // This part might not be necessary as it's not likely you'll fetch again on Gstcustomer focus
+            $('#Gstcustomer').on('focus', function () {
+               // alert("Gstcustomer field focused");
+                // Optionally, you can avoid fetching again here as `partyname` is used for fetching
+                // If necessary, use partyname value instead of Gstcustomer
+                var partyname = $('#partyname').val(); // Use partyname field
+                fetchPartyDetails(partyname); // Fetch based on partyname again
+            });
+
+            //////
+            /////
+
+
+            $('#partyname').on('focusout', function () {
+                var partyname = $(this).val();
+                fetchPartyDetails(partyname);
+            });
+
+
+
+            $('#Payablebillwithdiscount').on('focusout', function () {
+
+
+                // Get values from inputs
+                var transportCharge = parseFloat($('#TransportCharge').val()) || 0; // Ensure it's a number
+                var qty = parseFloat($('#qty').val()) || 0; // Ensure it's a number
+                var rateFromChart = parseFloat($('#RateFromChartTxt').val()) || 0; // Ensure it's a number
+                var gstCustomer = $('#Gstcustomer').val(); // Assuming this is a string like "Yes" or "No"
+
+                // Check if transportCharge is empty or an empty string and set to 0
+                if (isNaN(transportCharge) || transportCharge === "") {
+                    transportCharge = 0;
+                }
+
+                // Calculate rate applied
+                var rateApplied = rateFromChart + transportCharge; // Use transportCharge here
+                $('#RateApplied').val(rateApplied.toFixed(2)); // Set rate applied textbox value with 2 decimal places
+
+                // Calculate amount1
+                var amount1 = qty * rateApplied;
+                $('#Amount1').val(amount1.toFixed(2)); // Set amount1 textbox value with 2 decimal places
+
+                // Calculate GST amount
+                var gstAmount = (gstCustomer === "Yes") ? (amount1 * 0.05) : 0; // Use 0.05 instead of 5 / 100
+                $('#GstAmount').val(gstAmount.toFixed(2)); // Set GST amount textbox value with 2 decimal places
+
+                // Calculate total amount bill
+                var totalAmountBill = amount1 + gstAmount;
+                $('#TotalAmountBill').val(totalAmountBill.toFixed(2)); // Set total amount bill value with 2 decimal places
+
+                // Calculate payable bill with discount
+                var discountPercent = parseFloat($('#Discountpercent').val()) || 0; // Ensure it's a number
+                var royalty = parseFloat($('#Royalty').val()) || 0; // Ensure it's a number
+                var payableBillWithDiscount = totalAmountBill - (totalAmountBill * (discountPercent / 100)) + royalty;
+                $('#Payablebillwithdiscount').val(payableBillWithDiscount.toFixed(2)); // Set payable bill value with 2 decimal places
+
+
+            });
+
+
+            ///
+            $('#Payablebillwithdiscount').on('focus', function () {
+                calculateAmounts();
+
+                var gstCustomer = $('#Gstcustomer').val(); // Assuming this is a string like "Yes" or "No"
+                var gstAmount = parseFloat($('#GstAmount').val()); // Convert GstAmount to a number
+
+                if (gstCustomer == "Yes" && gstAmount === 0) {
+                    alert("GST is marked 'Yes', but the GST amount is 0. Please check.");
+                }
+
+                if (gstCustomer == "No" && gstAmount > 0) {
+                    alert("GST is marked 'No', but a GST amount is entered. Please check.");
+                }
+            });
+
+            ///
+            
+           
+
+
+
+            /////
+            
+
+        });
+    </script>
+}

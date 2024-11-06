@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Webpro.Models.Tblpartynamelist>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Partyname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GstCustomer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transcharge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+
+        <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Partyname)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GstCustomer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Transcharge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discount)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Partyname">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Partyname">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Partyname">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

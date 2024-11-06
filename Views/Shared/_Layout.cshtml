@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Webpro</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Webpro.styles.css" asp-append-version="true" />
+    <script src="~/js/jquery-3.6.0.min.js"> </script>
+    <script src="~/js/clearable-inputs.js"></script>
+    <script src="~/js/InputNavigation.js"></script>
+ 
+    <style>
+        body.dark-mode {
+            background-color: #343a40; /* Dark background */
+            color: white; /* Light text */
+        }
+
+        .dark-mode .navbar {
+            background-color: #495057; /* Dark navbar */
+        }
+
+        .dark-mode .card {
+            background-color: #6c757d; /* Dark card */
+            color: white; /* Light text for cards */
+        }
+
+        /* Additional styles for dark mode */
+        .dark-mode a {
+            color: #ffffff; /* Light link color */
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 300px; /* Set desired width here */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Webpro</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="tblDispatches" asp-action="Create">Dispatch</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="TblRateChartPartywises" asp-action="Index">Rate Chart</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="TblVehicleNumbers" asp-action="Index">Company Vehicle List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Paidamounts" asp-action="Index">Jama (Received)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Notes" asp-action="Index">Note</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Tblpartynamelists" asp-action="Index">Party</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="TblSites" asp-action="Create">Sites</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Openingbalances" asp-action="Create">Opening Balance</a>
+                        </li>
+
+                    </ul>
+                    <!-- Dark Mode Toggle -->
+                    <div class="form-check form-switch ms-3">
+                        <input class="form-check-input" type="checkbox" id="darkModeToggle" />
+                        <label class="form-check-label" for="darkModeToggle">Dark Mode</label>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <div></div>
+    <footer class="">
+        <div class="container">
+            &copy; 2024 - Webpro - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+   
+    
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <link href="~/css/background_ui_autocomplete_jquery.css" rel="stylesheet" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+
+            // Check local storage for dark mode preference
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+                toggle.checked = true; // Set toggle to checked if dark mode is enabled
+            }
+
+            toggle.addEventListener('change', function () {
+                if (this.checked) {
+                    body.classList.add('dark-mode');
+                    localStorage.setItem('darkMode', 'true'); // Save preference
+                } else {
+                    body.classList.remove('dark-mode');
+                    localStorage.setItem('darkMode', 'false'); // Save preference
+                }
+            });
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+
+
+
+
+
+    
+
+    
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script> <!-- Ensure jQuery is included -->
+
+    <script src="~/js/jquery-ui.js"></script>
+    <script src="~/js/jquery-confirm.min.js"></script>
+
+
+    <script src="~/js/jquery-ui.min.js"> </script>
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    
+  
+
+    <link href="~/js/jquery-ui.min.css" rel="stylesheet" />
+   
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+   
+
+    <!-- Offline CSS -->
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Offline JS -->
+  
+</body>
+</html>

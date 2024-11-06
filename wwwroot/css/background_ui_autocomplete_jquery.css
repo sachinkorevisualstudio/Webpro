@@ -1,0 +1,39 @@
+﻿/* Set background color for all autocomplete dropdown options */
+.ui-menu-item {
+    background-color: #e9ecef !important;
+    color: black !important; /* Ensure the text color is applied */
+}
+
+    /* Set background color for the active (hovered or focused) option */
+    .ui-menu-item .ui-state-active {
+        background-color: coral !important;
+        color: white !important; /* Adjust text color for contrast */
+    }
+
+/* Set max-width for the autocomplete dropdown */
+.ui-autocomplete {
+    max-width: 350px; /* Set max-width for the entire dropdown */
+    padding: 0 !important; /* Remove any internal padding */
+    margin: 0 !important; /* Remove any margin */
+    list-style-type: none; /* Remove bullets if any */
+    z-index: 9999; /* Ensure it's above other elements */
+    width: auto; /* Auto width based on content */
+}
+
+    /* Remove padding/margin for the individual list items */
+    .ui-autocomplete li {
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+    }
+
+/* More specific targeting to ensure proper background color application */
+.ui-menu-item-wrapper {
+    background-color: #e9ecef !important;
+    color: black !important;
+}
+
+/* Active item (hover or focus) styling */
+.ui-menu-item .ui-menu-item-wrapper.ui-state-active {
+    background-color: #007bff !important; 
+    color: white !important;
+}
